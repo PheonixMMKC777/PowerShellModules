@@ -40,14 +40,15 @@ If ($cidr -eq "32") {$Mask = 255;$subnets = 0;$hosts = 1}
 [byte]$RangeStart = $Mask -band $ipoctet
 [byte]$range = $RangeStart / $hosts
 $rangeEnd = $rangestart + $hosts - 1
+$Rhosts = $hosts - 2
 
 Write-Host ""
 Write-Host "Current Subnet: $Range" -f $Color
 Write-Host "Subnet Begins at X.Y.Z.$Rangestart" -f $Color
 Write-Host "Subnet Ends at X.Y.Z.$rangeEnd" -f $Color
 Write-Host "Subnet Mask is 255.255.255.$Mask" -f $Color
-Write-Host "Subnets Available: $subnets" -f $Color
-Write-Host "Hosts Per Subnet: $hosts" -f $Color
+Write-Host "IP's Per Subnet: $hosts" -f $Color
+Write-Host "Useable Host's Per Subnet: $Rhosts" -f $Color
 Write-Host "Subnet Bits: $CIDR" -f $Color
 Write-Host ""
 }
@@ -101,6 +102,7 @@ if ($cidr -ge "25") {
     $rangeEnd = $rangeStart   
     $rangeEnd2 = $rangestart2 + $hosts - 1
     }
+    $Rhosts = $hosts - 2
 
 Write-host "===================================" -f $color2
 Write-Host ""
@@ -110,6 +112,7 @@ Write-Host "Subnet Ends at X.Y.$rangeEnd.$rangeEnd2" -f $Color
 Write-Host "Subnet Mask: 255.255.$Mask.$Mask2" -f $Color
 Write-Host "Subnets Available: $subnets" -f $Color
 Write-Host "IP's Per Subnet: $hosts" -f $Color
+Write-Host "Useable Host's Per Subnet: $Rhosts" -f $Color
 Write-Host "Subnet Bits: $CIDR" -f $Color
 Write-Host ""
 }
