@@ -40,16 +40,20 @@ If ($cidr -eq "32") {$Mask = 255;$subnets = 0;$hosts = 1}
 [byte]$RangeStart = $Mask -band $ipoctet
 [byte]$range = $RangeStart / $hosts
 $rangeEnd = $rangestart + $hosts - 1
-$Rhosts = $hosts - 2
 
+$NetworkID = $RangeStart
+$BroadcastID = $rangeEnd
+$RangeStart++
+$rangeEnd--
 Write-Host ""
 Write-Host "Current Subnet: $Range" -f $Color
-Write-Host "Subnet Begins at X.Y.Z.$Rangestart" -f $Color
-Write-Host "Subnet Ends at X.Y.Z.$rangeEnd" -f $Color
-Write-Host "Subnet Mask is 255.255.255.$Mask" -f $Color
+Write-Host "Subnet ID at: $a.$b.$c.$NetworkID" -f $Color
+Write-Host "Useable Hosts Begin at: $a.$b.$c.$RangeStart" -f $Color
+Write-Host "Useable Hosts End at: $a.$b.$c.$rangeEnd" -f $Color
+Write-Host "Subnet Broadcast ID at: $a.$b.$c.$BroadcastID" -f $Color
+Write-Host "Subnet Mask is: 255.255.255.$Mask" -f $Color
 Write-Host "IP's Per Subnet: $hosts" -f $Color
-Write-Host "Useable Host's Per Subnet: $Rhosts" -f $Color
-Write-Host "Subnet Bits: $CIDR" -f $Color
+Write-Host "CIDR: $CIDR" -f $Color
 Write-Host ""
 }
 
@@ -89,31 +93,42 @@ If ($cidr -eq "32") {$Mask = 255;$Mask2 = 255;$subnets = 0;$hosts = 1}
 
 
 if ($cidr -le "24") {
-
-    [int]$range = $ipoctet * 2
+    
+    
     $rangeEnd = $rangeStart + $classhosts - 1   
     $rangeEnd2 = 255
+
+    [int]$range = $rangeEnd / $Classhosts
+    $range--
     }
 
 
 
 if ($cidr -ge "25") {
-    [int]$range = $ipoctet * 2
+
+    $range = $ipoctet * 2
+    $rangeAdd = $rangeStart2 / $hosts
+    $range = $range + $rangeAdd
+    
     $rangeEnd = $rangeStart   
     $rangeEnd2 = $rangestart2 + $hosts - 1
     }
-    $Rhosts = $hosts - 2
+$NetworkID = $RangeStart2
+$BroadcastID = $rangeEnd2
+$RangeStart2++
+$rangeEnd2--
 
 Write-host "===================================" -f $color2
 Write-Host ""
 Write-Host "Current Subnet: $Range" -f $Color
-Write-Host "Subnet Begins at X.Y.$Rangestart.$rangestart2" -f $Color
-Write-Host "Subnet Ends at X.Y.$rangeEnd.$rangeEnd2" -f $Color
+Write-Host "Subnet Network ID: $a.$b.$Rangestart.$NetworkID" -f $Color
+Write-Host "Useable Hosts Begin at: $a.$b.$Rangestart.$rangestart2" -f $Color
+Write-Host "Useable Hosts End at: $a.$b.$RangeEnd.$rangeEnd2" -f $Color
+Write-Host "Subnet Broadcast ID: $a.$b.$rangeEnd.$BroadcastID" -f $Color
 Write-Host "Subnet Mask: 255.255.$Mask.$Mask2" -f $Color
 Write-Host "Subnets Available: $subnets" -f $Color
 Write-Host "IP's Per Subnet: $hosts" -f $Color
-Write-Host "Useable Host's Per Subnet: $Rhosts" -f $Color
-Write-Host "Subnet Bits: $CIDR" -f $Color
+Write-Host "CIDR: $CIDR" -f $Color
 Write-Host ""
 }
 
