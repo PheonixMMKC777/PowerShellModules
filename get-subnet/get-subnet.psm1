@@ -94,7 +94,7 @@ If ($cidr -eq "32") {$Mask = 255;$Mask2 = 255;$subnets = 0;$hosts = 1}
 
 if ($cidr -le "24") {
     
-    
+    # IT WORKSS
     $rangeEnd = $rangeStart + $classhosts - 1   
     $rangeEnd2 = 255
 
@@ -103,12 +103,21 @@ if ($cidr -le "24") {
     }
 
 
-
+    # IT WORKSS
 if ($cidr -ge "25") {
+    
+    $divAmount = 256 / $hosts
+    $range = $rangeStart * $divAmount
+    $RD = 0
+    $addRange = 0
+    While ($rd -ne $rangeStart2) {
+        
+        $rd = $rd + $hosts
+        $AddRange++
+        }
 
-    $range = $ipoctet * 2
-    $rangeAdd = $rangeStart2 / $hosts
-    $range = $range + $rangeAdd
+        $range = $range + $addRange
+    
     
     $rangeEnd = $rangeStart   
     $rangeEnd2 = $rangestart2 + $hosts - 1
